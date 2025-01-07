@@ -1,4 +1,5 @@
 const Naaf = require("../models/naafSchema");
+const mongoose = require("mongoose");
 
 // Controller to handle form submission (POST request)
 exports.createNaaf = async (req, res) => {
@@ -137,76 +138,120 @@ exports.getOneNaaf = async (req, res) => {
 
 // Update Naaf data
 exports.updateNaaf = async (req, res) => {
+  console.log("update naaf API has been called");
+
   try {
     // Extract the parameters from the request body
     const {
-      name,
-      phone,
-      field3,
-      field4,
-      field5,
-      field6,
-      field7,
-      field8,
-      field9,
-      field10,
-      field11,
-      field12,
+      _id, // Mongoose ObjectId
+      customerName,
+      phoneNumber,
+      todayDate,
+      submissionDate,
+      Gins,
+      quantity,
+      total,
+      remainingMoney,
+      naafQad,
+      naafShana,
+      naafAsteen,
+      naafYakhan,
+      naafBaghal,
+      naafDaman,
+      naafZeereBaghal,
+      naafTumban,
+      naafPacha,
+      naafTumbanJeeb,
+      naafPatay,
+      yakhan,
+      asteen,
+      baghalJeeb,
+      daman,
+      tumban,
+      shana,
+      salayee,
+      taar,
+      jeebeRoy,
+      dukma,
     } = req.body;
 
-    // Find the Naaf document to update by either name or phone
-    // You can use the name or phone or both depending on your business logic
-    const query = name ? { name } : { phone };
+    // Ensure `id` is provided
+    if (!_id) {
+      return res
+        .status(400)
+        .json({ message: "Please provide the record's ID for the update" });
+    }
 
-    // Update the Naaf document
-    const updatedNaaf = await Naaf.findOneAndUpdate(
-      query, // Search by name or phone
-      {
-        name,
-        phone,
-        field3,
-        field4,
-        field5,
-        field6,
-        field7,
-        field8,
-        field9,
-        field10,
-        field11,
-        field12,
-      },
+    // Validate that `id` is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      return res.status(400).json({ message: "Invalid ID format" });
+    }
+
+    // Define the update object with all fields
+    const updateData = {
+      customerName,
+      phoneNumber,
+      todayDate,
+      submissionDate,
+      Gins,
+      quantity,
+      total,
+      remainingMoney,
+      naafQad,
+      naafShana,
+      naafAsteen,
+      naafYakhan,
+      naafBaghal,
+      naafDaman,
+      naafZeereBaghal,
+      naafTumban,
+      naafPacha,
+      naafTumbanJeeb,
+      naafPatay,
+      yakhan,
+      asteen,
+      baghalJeeb,
+      daman,
+      tumban,
+      shana,
+      salayee,
+      taar,
+      jeebeRoy,
+      dukma,
+    };
+
+    // Update the document by `_id`
+    const updatedNaaf = await Naaf.findByIdAndUpdate(
+      _id, // Search by _id
+      updateData, // Update data
       {
         new: true, // Return the updated document
-        runValidators: true, // Ensure validation is applied to the fields
+        runValidators: true, // Validate the fields
       }
     );
 
     if (!updatedNaaf) {
       return res.status(404).json({ message: "Naaf not found" });
     }
-
     // Return the updated Naaf document
     return res.status(200).json(updatedNaaf);
   } catch (error) {
-    console.error(error);
+    console.error("Error updating Naaf:", error);
     return res.status(500).json({ message: "Server error" });
   }
 };
 
 // delete naaf api
 
-// Controller function to delete a record based on the phone number
+// Controller function to delete a record
 exports.deleteNaaf = async (req, res) => {
   console.log("deleteNaaf API has been hit");
 
-  const { phone } = req.params; // Extract phone number from request parameters
-  console.log("Phone:", phone); // Make sure the phone number is logged correctly
+  const { _id } = req.params; // Extract _id from route parameters
+  console.log(`Deleting record with ID: ${_id}`); // Log the ID being deleted
 
   try {
-    // Find and delete the Naaf document based on the phone number
-    const phone = req.params.phone.trim();
-
-    const result = await Naaf.findOneAndDelete({ phone });
+    const result = await Naaf.findByIdAndDelete(_id); // Directly use _id for deletion
 
     if (!result) {
       return res.status(404).json({ message: "Record not found" });
@@ -214,7 +259,7 @@ exports.deleteNaaf = async (req, res) => {
 
     return res.status(200).json({ message: "Record deleted successfully" });
   } catch (error) {
-    console.error(error);
+    console.error("Error during deletion:", error);
     return res.status(500).json({ message: "Server error" });
   }
 };
