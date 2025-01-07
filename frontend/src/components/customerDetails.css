@@ -1,0 +1,26 @@
+.input-square {
+  width: 20%;
+  height: 32px;
+  background-color: aqua;
+  margin-right: 10%;
+}
+
+.container form button {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 14px;
+  padding: 8px 15px;
+  margin-right: 5%;
+  width: 60%;
+}
+
+.form-control {
+  font-size: 14px;
+  width: 130%;
+}
+
+.container.parent-container.mt-5 {
+  /* Your styles here */
+  background-color: #f0f0f0;
+  /* max-width: 1200px; or any other styles */
+}

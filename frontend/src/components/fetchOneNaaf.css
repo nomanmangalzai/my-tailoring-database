@@ -1,0 +1,8 @@
+#phone {
+  width: 100%;
+  max-width: 900px;
+}
+
+#search-button {
+  max-width: 150px;
+}

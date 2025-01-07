@@ -1,0 +1,35 @@
+.table-container {
+  display: flex;
+  justify-content: flex-end; /* Add space between the tables */
+}
+
+.table-container .table-wrapper,
+.table-container .table-wrapper-farmaish {
+  flex: none; /* Ensure tables take only their required width */
+}
+
+.th-for-customer-information {
+  border: 1px solid #dee2e6;
+  padding: "8px";
+  font-size: "50px";
+}
+
+.customer-farmaish-properties .naaf-andaze {
+  border: 1px solid #dee2e6;
+  padding: 8px;
+}
+
+.customer-naaf-sizes .naaf-andaze {
+  border: 1px solid #dee2e6;
+  padding: 8px;
+}
+
+.table-headers {
+  border: 1px solid #dee2e6;
+  padding: 2px;
+}
+
+.div-for-buttons {
+  display: flex;
+  justify-content: flex-end;
+}

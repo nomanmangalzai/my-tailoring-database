@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  width: 4.3cm;
+  height: 9.14cm;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table1 {
+  justify-content: flex-end;
+}

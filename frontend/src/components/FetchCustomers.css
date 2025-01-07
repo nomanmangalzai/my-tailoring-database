@@ -1,0 +1,15 @@
+.table td {
+  color: blue;
+}
+.table th {
+  background-color: #f0f8ff;
+  color: blue; /* This keeps the text color blue as per your previous request */
+  border: 1px solid #dee2e6;
+  padding: 8px;
+}
+.measurements-table {
+  margin-top: 5px; /* Add margin between tables */
+  width: 100%;
+  border-collapse: collapse;
+  direction: rtl;
+}
