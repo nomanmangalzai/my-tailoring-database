@@ -23,6 +23,7 @@ function App() {
       </main>
     </>
   );
+  console.log(Clicker);
 }
 
 export default App;

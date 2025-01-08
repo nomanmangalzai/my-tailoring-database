@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
-import ReactToPrint from "react-to-print";
+import React, { useState } from "react";
+
 import { Alert, Spinner } from "react-bootstrap";
-import PrintNaaf from "./PrintNaaf.tsx";
 
 import "./contactus.css";
 
@@ -13,8 +12,6 @@ const SearchNaafData = () => {
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
-
-  const componentRef = useRef();
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -655,13 +652,7 @@ const SearchNaafData = () => {
             >
               {editMode ? "Cancel" : "Edit"}
             </button>
-            <ReactToPrint
-              trigger={() => (
-                <button className="btn btn-success m-1 w-40">Print</button>
-              )}
-              content={() => componentRef.current}
-            />
-            <PrintNaaf ref={componentRef} data={data} />
+            <button className="btn btn-success m-1 w-40">Print</button>
             <button className="btn btn-danger m-1 w-30" onClick={handleDelete}>
               Delete
             </button>
