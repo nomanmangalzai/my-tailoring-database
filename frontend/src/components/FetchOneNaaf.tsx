@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useReactToPrint } from "react-to-print";
+import AnotherComponent from "./PrintNaaf";
 
 import { Alert, Spinner } from "react-bootstrap";
 
@@ -12,6 +14,8 @@ const SearchNaafData = () => {
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
+  const contentRef = useRef<HTMLDivElement>(null); // Reference to AnotherComponent
+  const reactToPrintFn = useReactToPrint({ contentRef });
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -652,7 +656,15 @@ const SearchNaafData = () => {
             >
               {editMode ? "Cancel" : "Edit"}
             </button>
-            <button className="btn btn-success m-1 w-40">Print</button>
+            <button
+              className="btn btn-success m-1 w-40"
+              onClick={() => reactToPrintFn()}
+            >
+              Print
+            </button>
+            <div style={{ display: "none" }}>
+              <AnotherComponent ref={contentRef} />
+            </div>
             <button className="btn btn-danger m-1 w-30" onClick={handleDelete}>
               Delete
             </button>
